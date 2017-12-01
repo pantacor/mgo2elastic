@@ -30,3 +30,17 @@ date \"2006-01-02\" }}") [%M2E_ELASTIC_INDEX%]
    --help, -h                               show help
    --version, -v                            print the version
 ```
+
+
+# Example
+
+Here we import from our mongodb in DB xyz the collection abc into elastic and use a date index as well a type from a field in mgo collection. 
+
+```
+$ mgoelastic -f http://localhost:7200/mongo-db \
+    -c ourcollection \
+    -t http://elastic.url.tld:9200 \
+    -i 'ourindex-{{ now | date "2000-01-01" }}' \
+    --type "{{ .doc.myfield }}" \
+    --threads "5"
+```
